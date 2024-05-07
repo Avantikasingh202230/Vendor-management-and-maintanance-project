@@ -1,0 +1,341 @@
+                                            Vendor profile Management
+    1.Create a new user 
+    path('api/vendors/create/', VendorCreateAPIView.as_view(), name='vendor-create'),
+    Description:This api is used for creating the user
+    http://127.0.0.1:8000/api/vendors/create/
+    example:
+    Request:
+    {
+    "name": "Sunny Singh",
+    "contact_details": "9988776655",
+    "address": "Vandana Enclave Banglore",
+    "vendor_code": "SU12",
+    "on_time_delivery_rate": 80.0,
+    "quality_rating_avg": 60.0,
+    "average_response_time": 99.0,
+    "fulfillment_rate": 98.0
+}
+    Response:
+     {
+    "id":"1",
+    "name": "Sunny Singh",
+    "contact_details": "9988776655",
+    "address": "Vandana Enclave Banglore",
+    "vendor_code": "SU12",
+    "on_time_delivery_rate": 80.0,
+    "quality_rating_avg": 60.0,
+    "average_response_time": 99.0,
+    "fulfillment_rate": 98.0
+}
+    
+    
+    2.List  all the vendor 
+    path('api/vendors/', VendorListAPIView.as_view(), name='vendor-list'),
+    Description:This API is used to list out all the vendor present in the database
+    Request:http://127.0.0.1:8000/api/vendors/
+    Example:
+    Response:
+    [
+    {
+        "id": 2,
+        "name": "ARYA SINGH",
+        "contact_details": "9897456789",
+        "address": "HIG 145 lucknow",
+        "vendor_code": "2",
+        "on_time_delivery_rate": 80.0,
+        "quality_rating_avg": 8.0,
+        "average_response_time": 120.0,
+        "fulfillment_rate": 70.0
+    },
+    {
+        "id": 3,
+        "name": "ARYA SINGH",
+        "contact_details": "9897456789",
+        "address": "HIG 145 lucknow",
+        "vendor_code": "3",
+        "on_time_delivery_rate": 80.0,
+        "quality_rating_avg": 8.0,
+        "average_response_time": 100.0,
+        "fulfillment_rate": 70.0
+    }
+    ]
+    3.Retrieve a specific vendor's details
+    path('api/vendors/<int:pk>/', VendorRetrieveAPIView.as_view(), name='vendor-retrieve'),
+    Description:This API is used retrieve a specific vendor's details
+    http://127.0.0.1:8000/api/vendors/1/
+    Example:to fetch the vendor data whose id is 1
+    Response:
+    {
+    "id": 1,
+    "name": "anurag singh",
+    "contact_details": "1111111111",
+    "address": "HIG LUCNNOW",
+    "vendor_code": "AN12",
+    "on_time_delivery_rate": 14.0,
+    "quality_rating_avg": 8.0,
+    "average_response_time": 6.0,
+    "fulfillment_rate": 7.0
+}
+    4.Update a vendor's details 
+    path('api/vendors/<int:pk>/update/', VendorUpdateAPIView.as_view(), name='vendor-update'),
+    Description:This API is used to update vendor's details
+    http://127.0.0.1:8000/api/vendors/1/update/ (pass 1 as vendor_id)
+    Example:To update the address of user Id=1
+    Request:
+    {
+    "id": 1,
+    "name": "anurag singh",
+    "contact_details": "1111111111",
+    "address": "HIG 175 sector I LUCNNOW",
+    "vendor_code": "AN12",
+    "on_time_delivery_rate": 14.0,
+    "quality_rating_avg": 8.0,
+    "average_response_time": 6.0,
+    "fulfillment_rate": 7.0
+}    
+    Response:
+    {
+    "id": 1,
+    "name": "anurag singh",
+    "contact_details": "1111111111",
+    "address": "HIG 175 sector I LUCNNOW",
+    "vendor_code": "AN12",
+    "on_time_delivery_rate": 14.0,
+    "quality_rating_avg": 8.0,
+    "average_response_time": 6.0,
+    "fulfillment_rate": 7.0
+}
+    5.Delete a vendor 
+    path('api/vendors/<int:pk>/delete/', VendorDestroyAPIView.as_view(), name='vendor-delete'),
+    Description:This API is used to delete the vendor based on the id.
+    http://127.0.0.1:8000/api/vendors/10/delete/
+    Vendor is deleted successfully whose id is 10 because we are passing 10 in the end point of the API.
+                                               
+                                               
+                                               
+                                                Purchase Order Tracking
+    1.Create a purchase order 
+    path('api/purchase_orders/', PurchaseOrderListCreateAPIView.as_view(), name='purchase_order_list_create'),
+    Description:This API is used to create a purchase order
+    Request:
+    {
+        "po_number": "PO12345456",
+        "order_date": "2024-05-01T15:15:00Z",
+        "delivery_date": "2024-05-10T15:15:00Z",
+        "items": [
+            {
+                "name": "Demo Item 1",
+                "price": 10.0
+            },
+            {
+                "name": "Demo Item 2",
+                "price": 20.0
+            },
+            {
+                "name": "Demo Item 3",
+                "price": 30.0
+            }
+        ],
+        "quantity": 10,
+        "status": "pending",
+        "quality_rating": 12.0,
+        "issue_date": "2024-05-06T15:16:00Z",
+        "acknowledgment_date": "2024-05-06T15:16:00Z",
+        "vendor": 1
+    }
+    Response:
+    {
+        "id": 31,
+        "po_number": "PO12345456",
+        "order_date": "2024-05-01T15:15:00Z",
+        "delivery_date": "2024-05-10T15:15:00Z",
+        "items": [
+            {
+                "name": "Demo Item 1",
+                "price": 10.0
+            },
+            {
+                "name": "Demo Item 2",
+                "price": 20.0
+            },
+            {
+                "name": "Demo Item 3",
+                "price": 30.0
+            }
+        ],
+        "quantity": 10,
+        "status": "pending",
+        "quality_rating": 12.0,
+        "issue_date": "2024-05-06T15:16:00Z",
+        "acknowledgment_date": "2024-05-06T15:16:00Z",
+        "vendor": 1
+    }
+    2.List all the purchase orders with an option to filter by vendor 
+    path('api/purchase_orders/all/', PurchaseOrderListAPIView.as_view(), name='purchase_order_list_all'),  
+    Description:This API is used to List all the purchase orders with an option to filter by vendor
+    http://127.0.0.1:8000/api/purchase_orders/all/?vendor_id=2
+    Response:
+    [
+    {
+        "id": 34,
+        "po_number": "PO10",
+        "order_date": "2024-04-30T12:35:00Z",
+        "delivery_date": "2024-05-07T12:35:00Z",
+        "items": [
+            {
+                "name": "Item 1",
+                "price": 10
+            },
+            {
+                "name": "Item 2",
+                "price": 20
+            }
+        ],
+        "quantity": 2,
+        "status": "completed",
+        "quality_rating": 26.0,
+        "issue_date": "2024-04-30T15:36:00Z",
+        "acknowledgment_date": "2024-05-01T12:36:00Z",
+        "vendor": 2
+    },
+    {
+        "id": 2,
+        "po_number": "PO123453",
+        "order_date": "2024-05-06T12:38:00Z",
+        "delivery_date": "2024-05-07T12:38:00Z",
+        "items": [
+            {
+                "name": "Item 1",
+                "price": 10
+            },
+            {
+                "name": "Item 2",
+                "price": 20
+            }
+        ],
+        "quantity": 1,
+        "status": "cancelled",
+        "quality_rating": 12.0,
+        "issue_date": "2024-05-01T12:45:00Z",
+        "acknowledgment_date": "2024-05-05T12:45:00Z",
+        "vendor": 2
+    }
+]
+    3.Retrieve details of specific purchase order
+    path('api/purchase_orders/<int:pk>/', PurchaseOrderRetrieveAPIView.as_view(), name='purchase_order_retrieve'),
+    Description:This API is used to retrieve details of specific purchase order
+    http://127.0.0.1:8000/api/purchase_orders/1/
+    Example:
+    Response:
+
+{
+    "id": 1,
+    "po_number": "av",
+    "order_date": "2024-04-30T17:55:00Z",
+    "delivery_date": "2024-05-03T17:55:00Z",
+    "items": [
+        {
+            "name": "Item 1",
+            "price": 10
+        },
+        {
+            "name": "Item 2",
+            "price": 20
+        }
+    ],
+    "quantity": 2,
+    "status": "completed",
+    "quality_rating": 12.0,
+    "issue_date": "2024-04-30T16:55:00Z",
+    "acknowledgment_date": "2024-04-30T16:55:00Z",
+    "vendor": 1
+}
+    4.Update a purchase order 
+    path('api/purchase_orders/<int:pk>/update/', PurchaseOrderUpdateAPIView.as_view(), name='purchase_order_update'),
+    Description:This API is used to update a purchase order
+    http://127.0.0.1:8000/api/purchase_orders/1/update/
+    Request:
+    "po_number": "ava",
+    "order_date": "2024-04-30T17:55:00Z",
+    "delivery_date": "2024-05-03T17:55:00Z",
+    "items": [
+        {
+            "name": "Item 1",
+            "price": 10
+        },
+        {
+            "name": "Item 2",
+            "price": 20
+        }
+    ],
+    "quantity": 2,
+    "status": "completed",
+    "quality_rating": 12.0,
+    "issue_date": "2024-04-30T16:55:00Z",
+    "acknowledgment_date": "2024-04-30T16:55:00Z",
+    "vendor": 3
+    Response:
+    {
+    "id": 1,
+    "po_number": "ava",
+    "order_date": "2024-04-30T17:55:00Z",
+    "delivery_date": "2024-05-03T17:55:00Z",
+    "items": [
+        {
+            "name": "Item 1",
+            "price": 10
+        },
+        {
+            "name": "Item 2",
+            "price": 20
+        }
+    ],
+    "quantity": 2,
+    "status": "completed",
+    "quality_rating": 12.0,
+    "issue_date": "2024-04-30T16:55:00Z",
+    "acknowledgment_date": "2024-04-30T16:55:00Z",
+    "vendor": 1
+}
+
+    5.Delete  a purchase order
+    path('api/purchase_orders/<int:pk>/delete/', PurchaseOrderDestroyAPIView.as_view(), name='purchase_order_delete'),
+    Description:THis API is used to delete a purchase order(to delete the purchase order whose id is 2).
+    http://127.0.0.1:8000/api/purchase_orders/2/delete/
+
+    
+                                                Vendor Performance Evaluation
+    
+    1.Retrieve a vendor's performance matrix
+    path('api/vendors/<int:vendor_id>/performance/', VendorPerformanceAPIView.as_view(), name='vendor_performance'),
+    Description:THis API is used to get the performance matrix of any specific vendor(suppose we want to get the performance of vendor whose ID IS 3)
+    http://127.0.0.1:8000/api/vendors/3/performance/
+    Response:
+    [
+    {
+        "id": 23,
+        "date": "2024-05-01T00:00:00Z",
+        "on_time_delivery_rate": 0.0,
+        "quality_rating_avg": 75.625,
+        "average_response_time": -7320.0,
+        "fulfillment_rate": 0.9411764705882353,
+        "vendor": 3
+    }
+]
+
+
+
+    Login functionality for jwt authentication to secure all the API'S
+    path('api/login/', login, name='api-login'),
+    Description:This API is used to generate the token for authentication.
+    http://127.0.0.1:8000/api/login/
+    Example:In the database vendor_code is unique so vendor_code:40 is present in the database so it will generate the token.
+    Request:
+    {
+        "vendor_code":"40"
+    }
+
+    Response:
+    {
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcxNTE2MzYxNywiaWF0IjoxNzE1MDc3MjE3LCJqdGkiOiIzYjMyNDUxOGE1NTc0MjQ3YjI4ZmE2MTlkZWViN2E2NCJ9.IJXRsFUILklumYFFZccNs2JAlmUbGaa1eYMy7T7al04"
+}
